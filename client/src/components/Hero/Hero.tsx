@@ -1,5 +1,5 @@
-import heroImage from "../assets/804.25102-Header_Pasen_04_Desktop.png";
-import logoImage from "../assets/Logo_Bakverkstan_Sedan2023_transparent.webp";
+import heroImage from "../../../public/EasterBackground.png";
+import logoImage from "../../../public/Logo_Bakverkstan_Sedan2023_transparent.webp";
 
 const Hero = () => {
   return (
