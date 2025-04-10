@@ -1,6 +1,6 @@
 import { useState } from "react";
 import heroImage from "../../assets/kardemummabullar.png";
-import logoImage from "../../assets/Logo_Bakverkstan_Sedan2023_transparent.webp";
+import logoImage from "../../assets/logoBakverkstanWhite.png";
 
 const Hero = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
