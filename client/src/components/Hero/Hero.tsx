@@ -4,7 +4,7 @@ import logoImage from "../../assets/logoBakverkstanWhite.png";
 import backgroundImage from "../../assets/kardemummabullar.png";
 import bakverkImage from "../../assets/cake.webp";
 import hanna from "../../assets/hannacontact.webp";
-import easterBackground from "../../assets/easterBackground.webp";
+import easterBackground from "../../assets/EasterBackground1.webp";
 import presentBackground from "../../assets/cakeFruit.webp";
 import workshopImage from "../../assets/workshop.webp";
 
