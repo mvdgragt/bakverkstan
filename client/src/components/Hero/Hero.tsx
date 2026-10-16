@@ -63,7 +63,7 @@ const Hero = () => {
           {/* Social Media Icons - Adjusted for mobile left alignment */}
           <div className="fixed top-8 md:top-20 left-8 md:right-8 md:left-auto z-50 flex space-x-6">
             <a
-              href="https://instagram.com/bagare79"
+              href="https://instagram.com/bakverkstan.se"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-300 transition-colors duration-200 transform hover:scale-110"
