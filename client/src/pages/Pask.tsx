@@ -18,7 +18,7 @@ const Pask: React.FC = () => {
           alt="Instagram"
           className="w-6 h-6 object-contain"
         />
-        <span>instagram.com/bagare79</span>
+        <span>instagram.com/bakverkstan.se</span>
       </a>
     </div>
   );
