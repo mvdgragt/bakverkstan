@@ -99,3 +99,8 @@ cd server && npm start
 ```
 
 The server serves the built client and the API from the same origin.
+
+For Vercel deployments with `client` as the project root, the API function is
+in `client/api/instagram.js`. Add `INSTAGRAM_TOKEN` as a server-side Vercel
+environment variable and redeploy. Do not add the token as a `VITE_` variable;
+those are exposed in the browser bundle.

@@ -21,7 +21,22 @@ export async function fetchInstagramPage(cursor?: string): Promise<InstagramPage
   if (cursor) url.searchParams.set("after", cursor);
 
   const response = await fetch(url);
-  const result: unknown = await response.json();
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/json")) {
+    throw new Error(
+      response.status === 404
+        ? "The Instagram API route is not deployed. Deploy the site's API function and set INSTAGRAM_TOKEN in the hosting environment."
+        : `The Instagram API returned a non-JSON response (HTTP ${response.status}).`
+    );
+  }
+
+  let result: unknown;
+  try {
+    result = await response.json();
+  } catch {
+    throw new Error("The Instagram API returned invalid JSON.");
+  }
+
   if (!response.ok) {
     const errorResponse = z
       .object({ error: z.string() })

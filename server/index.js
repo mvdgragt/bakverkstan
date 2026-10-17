@@ -32,6 +32,10 @@ if (instagram) await instagram.start();
 const app = express();
 app.disable("x-powered-by");
 
+app.get("/healthz", (_request, response) => {
+  response.status(200).json({ status: "ok" });
+});
+
 const cursorSchema = z.string().min(1).max(1024);
 
 app.get("/api/instagram", async (request, response) => {
