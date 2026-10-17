@@ -53,3 +53,49 @@ export default tseslint.config({
 })
 ```
 # Bakverkstan
+
+## Configuration
+
+Copy `.env.example` to `.env` to override the Instagram profile URL. The app
+validates this public Vite setting with Zod and defaults to the Bakverkstan
+profile when it is unset.
+
+Shared navigation data is validated with Zod, and Zustand manages shared UI
+state such as the mobile menu.
+
+## Instagram gallery
+
+The Bakverk page loads images from the server-side Instagram API endpoint.
+The Instagram access token must stay on the server and is never sent to the
+browser.
+
+1. Copy `server/.env.example` to `server/.env` and set `INSTAGRAM_TOKEN` to a
+   long-lived token for the Instagram professional account, with the
+   `instagram_business_basic` permission. Keep this file private; it is
+   excluded from Git.
+2. Install and start the API server:
+
+   ```sh
+   cd server
+   npm install
+   npm run dev
+   ```
+
+3. In a second terminal, start the web app:
+
+   ```sh
+   cd client
+   npm run dev
+   ```
+
+The gallery initially shows the latest page of images. Use **Visa fler bilder**
+to load the remaining pages from Instagram, including individual images in
+carousel posts. For production, build the client and then start the server
+from the repository root:
+
+```sh
+cd client && npm run build
+cd server && npm start
+```
+
+The server serves the built client and the API from the same origin.

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../assets/logoBakverkstanWhite.png";
 import backgroundImage from "../../assets/kardemummabullar.png";
@@ -7,9 +7,14 @@ import hanna from "../../assets/hannacontact.webp";
 import easterBackground from "../../assets/EasterBackground1.webp";
 import presentBackground from "../../assets/cakeFruit.webp";
 import workshopImage from "../../assets/workshop.webp";
+import { INSTAGRAM_URL } from "../../config/environment";
+import { menuItems } from "../../config/navigation";
+import { useUiStore } from "../../stores/uiStore";
 
 const Hero = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMenuOpen = useUiStore((state) => state.isMenuOpen);
+  const toggleMenu = useUiStore((state) => state.toggleMenu);
+  const setMenuOpen = useUiStore((state) => state.setMenuOpen);
   const [scrollPosition, setScrollPosition] = useState(0);
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -34,15 +39,6 @@ const Hero = () => {
     "/kontakt": hanna,
   } as const;
 
-  const menuItems = [
-    { name: "Hem", href: "/" },
-    { name: "Bakverk", href: "/bakverk" },
-    { name: "Påsk", href: "/pask" },
-    { name: "Presenter", href: "/presenter" },
-    { name: "Workshops", href: "/workshops" },
-    { name: "Kontakt", href: "/kontakt" },
-  ] as const;
-
   const currentHeroImage =
     heroImages[location.pathname as keyof typeof heroImages] || heroImages["/"];
 
@@ -63,7 +59,7 @@ const Hero = () => {
           {/* Social Media Icons - Adjusted for mobile left alignment */}
           <div className="fixed top-8 md:top-20 left-8 md:right-8 md:left-auto z-50 flex space-x-6">
             <a
-              href="https://instagram.com/bakverkstan.se"
+              href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-300 transition-colors duration-200 transform hover:scale-110"
@@ -98,7 +94,7 @@ const Hero = () => {
 
       {/* Mobile Hamburger Button */}
       <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={toggleMenu}
         className="fixed top-4 right-4 z-50 p-2 rounded-md md:hidden backdrop-blur-sm"
         aria-label="Toggle menu"
       >
@@ -135,7 +131,7 @@ const Hero = () => {
                     isActive ? "text-white" : "text-gray-800 hover:text-white"
                   }`
                 }
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setMenuOpen(false)}
               >
                 {item.name}
               </NavLink>
@@ -154,8 +150,8 @@ const Hero = () => {
                   key={item.name}
                   to={item.href}
                   className={({ isActive }) =>
-                    `text-gray-800 font-medium transition-colors duration-200 uppercase text-sm tracking-wider relative 
-                    after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gray-600 
+                    `text-gray-800 font-medium transition-colors duration-200 uppercase text-sm tracking-wider relative
+                    after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-gray-600
                     after:transition-transform after:duration-300 
                     ${
                       isActive

@@ -1,5 +1,6 @@
 import React from "react";
 import instagramLogo from "../assets/instagram.png";
+import { INSTAGRAM_URL } from "../config/environment";
 
 const Workshops: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ const Workshops: React.FC = () => {
         This website is updated soon. Please follow us on Instagram for now!
       </h1>
       <a
-        href="https://instagram.com/bakverkstan.se"
+        href={INSTAGRAM_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center space-x-2 text-blue-500 hover:text-blue-700"

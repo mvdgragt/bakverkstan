@@ -1,11 +1,12 @@
 // components/SocialMedia.tsx
 import { FC } from "react";
+import { INSTAGRAM_URL } from "../../config/environment";
 
 const SocialMedia: FC = () => {
   return (
     <div className="fixed top-8 md:top-20 left-8 md:right-8 md:left-auto z-50 flex space-x-6">
       <a
-        href="https://instagram.com/bakverkstan.se"
+        href={INSTAGRAM_URL}
         target="_blank"
         rel="noopener noreferrer"
         className="text-white hover:text-gray-300 transition-colors duration-200 transform hover:scale-110"

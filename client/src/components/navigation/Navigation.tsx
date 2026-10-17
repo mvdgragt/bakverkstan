@@ -1,29 +1,21 @@
 // components/Navigation.tsx
-import { FC } from "react";
+import type { FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logoImage from "../../assets/Logo_Bakverkstan_Sedan2023_transparent.webp";
+import { menuItems } from "../../config/navigation";
+import { useUiStore } from "../../stores/uiStore";
 
-interface NavigationProps {
-  menuItems: {
-    name: string;
-    href: string;
-  }[];
-  isMenuOpen: boolean;
-  setIsMenuOpen: (value: boolean) => void;
-}
-
-const Navigation: FC<NavigationProps> = ({
-  menuItems,
-  isMenuOpen,
-  setIsMenuOpen,
-}) => {
+const Navigation: FC = () => {
+  const isMenuOpen = useUiStore((state) => state.isMenuOpen);
+  const toggleMenu = useUiStore((state) => state.toggleMenu);
+  const setMenuOpen = useUiStore((state) => state.setMenuOpen);
   const location = useLocation();
 
   return (
     <>
       {/* Mobile Hamburger Button */}
       <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={toggleMenu}
         className="fixed top-4 right-4 z-50 p-2 rounded-md md:hidden backdrop-blur-sm"
       >
         <svg
@@ -56,7 +48,7 @@ const Navigation: FC<NavigationProps> = ({
                 key={item.name}
                 to={item.href}
                 className="text-2xl md:text-3xl text-gray-800 hover:text-white font-medium transform transition-all duration-300 hover:scale-110"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => setMenuOpen(false)}
               >
                 {item.name}
               </Link>
