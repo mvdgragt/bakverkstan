@@ -176,10 +176,10 @@ const Workshops = () => {
       )}
 
       <section className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-14 md:flex-row md:items-center md:justify-between md:gap-14 md:px-10">
-        <h1 className="text-3xl font-bold text-gray-800 md:max-w-md md:text-5xl">
+        <h1 className="text-3xl font-bold text-gray-800 md:text-5xl">
           {comingSoon ? "Workshops i Bakverkstan öppnar snart" : "Klassiska bullar och julbak från grunden."}
         </h1>
-        <p className="text-lg leading-relaxed text-gray-600 md:max-w-2xl">
+        <p className="text-lg leading-relaxed text-gray-600">
           {comingSoon
             ? "Vi förbereder något riktigt gott! Följ oss på Instagram så missar du inte starten."
             : "Följ med in i köket och lär dig knepen som gör att kanelbullarna blir perfekta varje gång. Välj om du vill boka plats i en öppen grupp och baka tillsammans med andra, eller om du föredrar en privat bakworkshop där du och dina vänner eller familj är de enda deltagarna. Under advent byter vi kanel mot saffran och nejlika för juligare toner."}
