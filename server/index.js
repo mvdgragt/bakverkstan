@@ -1,10 +1,12 @@
 import "dotenv/config";
 import express from "express";
 import { existsSync } from "node:fs";
+import { randomBytes } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { createInstagram } from "./instagram.js";
+import { createWorkshops } from "./workshops.js";
 
 const optionalTokenSchema = z.preprocess(
   (value) => (typeof value === "string" && value.trim() === "" ? undefined : value),
@@ -14,6 +16,8 @@ const optionalTokenSchema = z.preprocess(
 const environmentSchema = z.object({
   INSTAGRAM_TOKEN: optionalTokenSchema,
   CACHE_SECONDS: z.coerce.number().int().positive().default(300),
+  ADMIN_PASSWORD: optionalTokenSchema,
+  SESSION_SECRET: optionalTokenSchema,
   PORT: z.coerce.number().int().positive().default(3001),
 });
 
@@ -31,6 +35,19 @@ if (instagram) await instagram.start();
 
 const app = express();
 app.disable("x-powered-by");
+app.set("trust proxy", 1);
+
+const workshops = createWorkshops({
+  dataDir: path.join(directory, "data"),
+  adminPassword: environment.ADMIN_PASSWORD,
+  sessionSecret: environment.SESSION_SECRET ?? randomBytes(32).toString("hex"),
+  secureCookie: process.env.NODE_ENV === "production",
+});
+app.use("/api", workshops.router);
+app.use(
+  "/uploads",
+  express.static(workshops.uploadDir, { maxAge: "7d", immutable: true, index: false, fallthrough: false })
+);
 
 app.get("/healthz", (_request, response) => {
   response.status(200).json({ status: "ok" });
