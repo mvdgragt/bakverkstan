@@ -254,7 +254,7 @@ const Workshops = () => {
         </div>
       )}
 
-      <section className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-14 md:flex-row md:items-center md:justify-between md:gap-14 md:px-10">
+      <section className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-14 md:flex-row md:items-center md:justify-between md:gap-14 md:px-10">
         <h1 className="text-3xl font-bold text-gray-800 md:text-5xl">
           {comingSoon
             ? "Workshops i Bakverkstan öppnar snart"
@@ -282,7 +282,7 @@ const Workshops = () => {
       )}
 
       {!comingSoon && (
-        <section className="mx-auto max-w-6xl px-6 py-14 md:px-10">
+        <section className="mx-auto w-full max-w-6xl px-6 py-14 md:px-10">
           <h2 className="mb-8 text-center text-2xl font-bold text-gray-800">
             Planerade öppna bakworkshops
           </h2>
