@@ -175,8 +175,8 @@ const Workshops = () => {
         </div>
       )}
 
-      <section className="mx-auto max-w-3xl px-6 py-14 text-center md:px-10">
-        <h1 className="mb-6 text-3xl font-bold text-gray-800 md:text-4xl">
+      <section className="mx-auto grid max-w-6xl items-center gap-8 px-6 py-14 md:grid-cols-2 md:gap-14 md:px-10">
+        <h1 className="text-3xl font-bold text-gray-800 md:text-5xl">
           {comingSoon ? "Workshops i Bakverkstan öppnar snart" : "Klassiska bullar och julbak från grunden."}
         </h1>
         <p className="text-lg leading-relaxed text-gray-600">
