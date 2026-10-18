@@ -1,143 +1,108 @@
-// import React, { useState } from "react";
+import cakeFruit from "../assets/cakeFruit.webp";
 
-const Kontakt: React.FC = () => {
-  //   const [formData, setFormData] = useState({
-  //     name: "",
-  //     email: "",
-  //     message: "",
-  //   });
+// Fill in your Swish number to show the Swish box on the page.
+const SWISH_NUMBER = "";
 
-  // const [formStatus, setFormStatus] = useState<"idle" | "success" | "error">(
-  //   "idle"
-  // );
+const ADDRESS = "Bäckamansgatan 6, 252 30 Helsingborg";
+const MAP_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(ADDRESS)}&z=15&output=embed`;
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`;
 
-  // const handleChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prev) => ({ ...prev, [name]: value }));
-  // };
+const card = "rounded-2xl bg-white p-6 shadow-md";
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault();
+const Kontakt = () => (
+  <main className="bg-amber-50/60 px-6 py-12 md:px-10">
+    <div className="mx-auto max-w-6xl">
+      <header className="mb-10 text-center">
+        <h1 className="mb-3 text-3xl font-bold text-gray-800 md:text-4xl">
+          Hej och välkommen!
+        </h1>
+        <p className="mx-auto max-w-2xl text-lg text-gray-600">
+          Har du frågor om tårtor, beställningar eller workshops? Hör av dig så
+          hjälper vi dig gärna.
+        </p>
+      </header>
 
-  //   // Simulate sending an email
-  //   try {
-  //     // Replace this with your email-sending logic
-  //     console.log("Sending email to info@bakverkstan.se", formData);
-  //     setFormStatus("success");
-  //     setFormData({ name: "", email: "", message: "" });
-  //   } catch (error) {
-  //     console.error("Error sending email:", error);
-  //     setFormStatus("error");
-  //   }
-  // };
-
-  return (
-    <div className="bg-gray-100 flex items-center justify-center p-6">
-      <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Address Section */}
-          <div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-6">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="flex flex-col gap-6">
+          <div className={card}>
+            <h2 className="mb-4 text-xl font-bold text-gray-800">
               Bakverkstan
-            </h1>
+            </h2>
+            <address className="mb-5 not-italic text-gray-600">
+              Bäckamansgatan 6<br />
+              252 30 Helsingborg
+            </address>
+            <ul className="space-y-2 text-gray-700">
+              <li>
+                <strong>Tel:</strong>{" "}
+                <a
+                  className="underline hover:text-gray-900"
+                  href="tel:+46733793913"
+                >
+                  0733 79 39 13
+                </a>
+              </li>
+              <li>
+                <strong>Mail:</strong>{" "}
+                <a
+                  className="underline hover:text-gray-900"
+                  href="mailto:info@bakverkstan.se"
+                >
+                  info@bakverkstan.se
+                </a>
+              </li>
+            </ul>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a
+                className="rounded-lg bg-stone-700 px-4 py-2 font-medium text-white hover:bg-stone-800"
+                href="https://instagram.com/bakverkstan.se"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram
+              </a>
 
-            <p className="text-gray-600">
-              <br />
-              Bäckamansgatan 6
-              <br />
-              25230 Helsingborg
-              <br />
-              Sverige
-            </p>
-            <p className="text-gray-600 mt-4">
-              <strong>Tel:</strong> 0733793913
-            </p>
-            <p className="text-gray-600 mt-4">
-              <strong>Mail:</strong> info@bakverkstan.se
-            </p>
+              <a
+                className="rounded-lg bg-stone-100 px-4 py-2 font-medium text-stone-700 hover:bg-stone-200"
+                href={MAP_LINK}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Vägbeskrivning
+              </a>
+            </div>
           </div>
 
-          {/* Contact Form */}
-          {/* <div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-6">
-              Kontakta oss!
-            </h1>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Namn
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  E-mail
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Medelande
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={4}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-              >
-                Skicka meddelande
-              </button>
-            </form>
-            {formStatus === "success" && (
-              <p className="mt-4 text-green-600">
-                Ditt meddelande har skickats!
+          {SWISH_NUMBER && (
+            <div className={card}>
+              <h2 className="mb-2 text-xl font-bold text-gray-800">
+                Betala med Swish
+              </h2>
+              <p className="text-gray-600">
+                Swish-nummer:{" "}
+                <strong className="text-gray-800">{SWISH_NUMBER}</strong>
               </p>
-            )}
-            {formStatus === "error" && (
-              <p className="mt-4 text-red-600">
-                Någonting gick fel. Försök gärna igen.
-              </p>
-            )}
-          </div> */}
+            </div>
+          )}
+
+          <img
+            src={cakeFruit}
+            alt="Tårta från Bakverkstan"
+            loading="lazy"
+            className="h-56 w-full rounded-2xl object-cover shadow-md md:flex-1"
+          />
         </div>
+
+        <iframe
+          title={`Karta över ${ADDRESS}`}
+          src={MAP_SRC}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="h-96 w-full rounded-2xl border-0 shadow-md md:h-full md:min-h-[32rem]"
+        />
       </div>
     </div>
-  );
-};
+  </main>
+);
 
 export default Kontakt;
