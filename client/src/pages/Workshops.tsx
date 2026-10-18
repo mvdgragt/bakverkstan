@@ -188,8 +188,8 @@ const Workshops = () => {
 
       {!comingSoon && (
         <section className="bg-amber-50 px-6 py-10 md:px-10">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-14">
-            <p className="text-lg text-gray-600 md:max-w-3xl">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-14">
+            <p className="text-lg text-gray-600 md:max-w-2xl">
               Du får förkläde, recept och alla ingredienser. Vi bakar, fikar och du går hem med dina egna nybakade godsaker.
             </p>
             <h2 className="order-first text-2xl font-bold text-gray-800 md:order-last md:whitespace-nowrap md:text-3xl">Välkommen in i köket!</h2>
