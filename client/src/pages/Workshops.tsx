@@ -16,6 +16,14 @@ const chip = (selected: boolean) =>
     selected ? "bg-stone-800 text-white" : "bg-stone-100 text-stone-700 hover:bg-stone-200"
   }`;
 
+const dateBadge = (iso: string) => {
+  const d = new Date(`${iso}T12:00:00`);
+  return {
+    month: d.toLocaleDateString("sv-SE", { month: "short" }).replace(".", ""),
+    day: d.getDate(),
+  };
+};
+
 const field = "w-full rounded border border-gray-300 px-3 py-2";
 
 const BookingForm = ({
@@ -167,18 +175,31 @@ const Workshops = () => {
         </div>
       )}
 
-      <section className="bg-gradient-to-b from-amber-50 to-white px-6 py-14 text-center md:px-10">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-amber-700">Baka tillsammans</p>
-        <h1 className="mb-4 text-4xl font-bold text-gray-800">Workshops i Bakverkstan</h1>
-        <p className="mx-auto max-w-2xl text-lg text-gray-600">
+      <section className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-14 md:flex-row md:items-center md:justify-between md:gap-14 md:px-10">
+        <h1 className="text-3xl font-bold text-gray-800 md:text-5xl">
+          {comingSoon ? "Workshops i Bakverkstan öppnar snart" : "Klassiska bullar och julbak från grunden."}
+        </h1>
+        <p className="text-lg leading-relaxed text-gray-600">
           {comingSoon
-            ? "Vi förbereder något riktigt gott! Workshops i Bakverkstan öppnar snart – följ oss på Instagram så missar du inte starten."
-            : "Kom och baka, dekorera och fika med oss! Oavsett om det gäller barnkalaset, en mysig eftermiddag eller möhippan lär du dig något nytt – och går hem med något gott."}
+            ? "Vi förbereder något riktigt gott! Följ oss på Instagram så missar du inte starten."
+            : "Följ med in i köket och lär dig knepen som gör att kanelbullarna blir perfekta varje gång. Välj om du vill boka plats i en öppen grupp och baka tillsammans med andra, eller om du föredrar en privat bakworkshop där du och dina vänner eller familj är de enda deltagarna. Under advent byter vi kanel mot saffran och nejlika för juligare toner."}
         </p>
       </section>
 
       {!comingSoon && (
-        <section className="mx-auto max-w-6xl px-6 pb-16 md:px-10">
+        <section className="bg-amber-50 px-6 py-10 md:px-10">
+          <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-14">
+            <p className="text-lg text-gray-600 md:max-w-2xl">
+              Du får förkläde, recept och alla ingredienser. Vi bakar, fikar och du går hem med dina egna nybakade godsaker.
+            </p>
+            <h2 className="order-first text-2xl font-bold text-gray-800 md:order-last md:whitespace-nowrap md:text-3xl">Välkommen in i köket!</h2>
+          </div>
+        </section>
+      )}
+
+      {!comingSoon && (
+        <section className="mx-auto max-w-6xl px-6 py-14 md:px-10">
+          <h2 className="mb-8 text-center text-2xl font-bold text-gray-800">Planerade öppna bakworkshops</h2>
           <div className="mb-8 flex flex-wrap justify-center gap-3" role="group" aria-label="Filtrera workshops">
             <button type="button" aria-pressed={active === null} onClick={() => setActive(null)} className={chip(active === null)}>
               Alla
@@ -207,13 +228,19 @@ const Workshops = () => {
               const full = workshop.spotsLeft === 0;
               return (
                 <li key={workshop.id} className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-md">
-                  {image ? (
-                    <img src={image} alt={workshop.title} loading="lazy" className="h-48 w-full object-cover" />
-                  ) : (
-                    <div className={`flex h-48 items-center justify-center bg-gradient-to-br ${meta.band} text-6xl`}>
-                      <span aria-hidden="true">{meta.emoji}</span>
-                    </div>
-                  )}
+                  <div className="relative">
+                    {image ? (
+                      <img src={image} alt={workshop.title} loading="lazy" className="h-56 w-full object-cover" />
+                    ) : (
+                      <div className={`flex h-56 items-center justify-center bg-gradient-to-br ${meta.band} text-6xl`}>
+                        <span aria-hidden="true">{meta.emoji}</span>
+                      </div>
+                    )}
+                    <span className="absolute right-3 top-3 rounded-md bg-white/95 px-3 py-1.5 text-center text-sm font-bold leading-tight text-gray-800 shadow">
+                      <span className="block text-xs font-semibold uppercase text-amber-700">{dateBadge(workshop.date).month}</span>
+                      {dateBadge(workshop.date).day}
+                    </span>
+                  </div>
                   <div className="flex flex-1 flex-col p-5">
                     <div className="mb-3 flex flex-wrap gap-2">
                       <span className={`rounded-full px-3 py-1 text-xs font-semibold ${meta.accent}`}>{meta.label}</span>
