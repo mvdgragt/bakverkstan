@@ -269,7 +269,7 @@ const Workshops = () => {
 
       {!comingSoon && (
         <section className="bg-amber-50">
-          <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 md:flex-row md:items-center md:justify-between md:gap-14 md:px-10">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-10 md:flex-row md:items-center md:justify-between md:gap-14 md:px-10">
             <p className="text-lg text-gray-600">
               Du får förkläde, recept och alla ingredienser. Vi bakar, fikar och
               du går hem med dina egna nybakade godsaker.
