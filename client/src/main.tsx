@@ -9,6 +9,7 @@ import Pask from "./pages/Pask";
 import Presenter from "./pages/Presenter";
 import Workshops from "./pages/Workshops";
 import Kontakt from "./pages/Kontakt";
+import Admin from "./pages/Admin";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -21,6 +22,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="presenter" element={<Presenter />} />
           <Route path="workshops" element={<Workshops />} />
           <Route path="kontakt" element={<Kontakt />} />
+          <Route path="admin" element={<Admin />} />
         </Route>
       </Routes>
     </BrowserRouter>
