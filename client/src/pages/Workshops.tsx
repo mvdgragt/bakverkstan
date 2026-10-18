@@ -187,9 +187,9 @@ const Workshops = () => {
       </section>
 
       {!comingSoon && (
-        <section className="bg-amber-50 px-6 py-12 text-center md:px-10">
-          <h2 className="mb-3 text-2xl font-bold text-gray-800">Välkommen in i köket!</h2>
-          <p className="mx-auto max-w-2xl text-gray-600">
+        <section className="bg-amber-50 px-6 py-8 text-center md:px-10">
+          <p className="mx-auto max-w-6xl text-gray-600">
+            <strong className="text-xl font-bold text-gray-800">Välkommen in i köket!</strong>{" "}
             Du får förkläde, recept och alla ingredienser. Vi bakar, fikar och du går hem med dina egna nybakade godsaker.
           </p>
         </section>
