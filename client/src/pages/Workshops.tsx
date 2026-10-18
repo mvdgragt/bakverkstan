@@ -187,11 +187,13 @@ const Workshops = () => {
       </section>
 
       {!comingSoon && (
-        <section className="bg-amber-50 px-6 py-8 text-center md:px-10">
-          <p className="mx-auto max-w-6xl text-gray-600">
-            <strong className="text-xl font-bold text-gray-800">Välkommen in i köket!</strong>{" "}
-            Du får förkläde, recept och alla ingredienser. Vi bakar, fikar och du går hem med dina egna nybakade godsaker.
-          </p>
+        <section className="bg-amber-50 px-6 py-10 md:px-10">
+          <div className="mx-auto grid max-w-6xl items-center gap-4 md:grid-cols-2 md:gap-14">
+            <p className="text-lg text-gray-600 md:text-left">
+              Du får förkläde, recept och alla ingredienser. Vi bakar, fikar och du går hem med dina egna nybakade godsaker.
+            </p>
+            <h2 className="order-first text-2xl font-bold text-gray-800 md:order-last md:text-3xl">Välkommen in i köket!</h2>
+          </div>
         </section>
       )}
 
