@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { BAKVERK_CATEGORIES, matchesCategory } from "../config/bakverkCategories";
 import { INSTAGRAM_URL } from "../config/environment";
 import { useInstagramStore } from "../stores/instagramStore";
 
@@ -11,9 +12,25 @@ const Bakverk = () => {
   const fetchPosts = useInstagramStore((state) => state.fetchPosts);
   const loadMore = useInstagramStore((state) => state.loadMore);
 
+  const [activeLabel, setActiveLabel] = useState<string | null>(null);
+
   useEffect(() => {
     void fetchPosts();
   }, [fetchPosts]);
+
+  const categories = useMemo(
+    () =>
+      BAKVERK_CATEGORIES.flatMap((category) => {
+        const match = posts.find((post) => matchesCategory(post.caption, category));
+        return match ? [{ category, cover: match.image }] : [];
+      }),
+    [posts]
+  );
+
+  const visiblePosts = useMemo(() => {
+    const active = BAKVERK_CATEGORIES.find((c) => c.label === activeLabel);
+    return active ? posts.filter((post) => matchesCategory(post.caption, active)) : posts;
+  }, [posts, activeLabel]);
 
   return (
     <main className="mx-auto max-w-7xl px-6 py-12 md:px-10">
@@ -54,9 +71,50 @@ const Bakverk = () => {
         </p>
       )}
 
-      {posts.length > 0 && (
+      {categories.length > 0 && (
+        <nav aria-label="Filtrera bakverk" className="mb-8">
+          <ul className="flex gap-5 overflow-x-auto px-2 py-3 sm:justify-center">
+            {categories.map(({ category, cover }) => {
+              const active = category.label === activeLabel;
+              return (
+                <li key={category.label} className="shrink-0">
+                  <button
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setActiveLabel(active ? null : category.label)}
+                    className="flex w-24 flex-col items-center gap-2"
+                  >
+                    <span
+                      className={`rounded-full p-1 ring-4 transition ${
+                        active ? "ring-stone-800" : "ring-stone-300 hover:ring-stone-500"
+                      }`}
+                    >
+                      <img
+                        src={cover}
+                        alt=""
+                        className="h-20 w-20 rounded-full object-cover"
+                      />
+                    </span>
+                    <span
+                      className={`text-sm ${active ? "font-semibold text-gray-900" : "text-gray-700"}`}
+                    >
+                      {category.label}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      )}
+
+      {activeLabel && visiblePosts.length === 0 && (
+        <p className="py-8 text-center text-gray-600">Inga bilder i denna kategori.</p>
+      )}
+
+      {visiblePosts.length > 0 && (
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => {
+          {visiblePosts.map((post) => {
             return (
               <li key={post.id} className="overflow-hidden rounded-lg bg-white shadow">
                 <a
