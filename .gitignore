@@ -4,3 +4,9 @@ client/.env*
 server/.env*
 !server/.env.example
 server/data/
+
+# Build output
+client/dist/
+
+# macOS
+.DS_Store
