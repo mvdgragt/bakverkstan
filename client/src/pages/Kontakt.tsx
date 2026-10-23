@@ -10,7 +10,7 @@ const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 const card = "rounded-2xl bg-white p-6 shadow-md";
 
 const Kontakt = () => (
-  <main className="bg-amber-50/60 px-6 py-12 md:px-10">
+  <main className="bg-brand-cream px-6 py-12 md:px-10">
     <div className="mx-auto max-w-6xl">
       <header className="mb-10 text-center">
         <h2 className="mb-3 text-3xl font-bold text-gray-800 md:text-4xl">

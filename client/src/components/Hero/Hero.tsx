@@ -51,11 +51,17 @@ const Hero = () => {
   return (
     <div
       className={`relative w-full overflow-hidden ${
-        isContactPage
-          ? "bg-[#f3e6d3]"
-          : "transition-[height] duration-300 ease-out"
+        isHomePage
+          ? ""
+          : isContactPage
+            ? "bg-brand-sand"
+            : "transition-[height] duration-300 ease-out"
       }`}
-      style={!isContactPage ? { height: `${heightPercentage}vh` } : undefined}
+      style={
+        !isContactPage && !isHomePage
+          ? { height: `${heightPercentage}vh` }
+          : undefined
+      }
     >
       {/* Social Media Icons */}
       {!isMenuOpen && (
@@ -88,9 +94,7 @@ const Hero = () => {
       {/* Mobile Hamburger Button */}
       <button
         onClick={toggleMenu}
-        className={`fixed top-4 right-4 z-50 p-2 rounded-md md:hidden backdrop-blur-sm ${
-          isContactPage ? "text-stone-800" : "text-gray-200"
-        }`}
+        className="fixed top-4 right-4 z-50 p-2 rounded-md md:hidden backdrop-blur-sm text-brand-brown"
         aria-label="Toggle menu"
       >
         <svg
@@ -135,8 +139,10 @@ const Hero = () => {
         </div>
       )}
 
-      {/* Desktop Navigation */}
-      <div className="absolute top-0 left-0 right-0 z-30 hidden md:block">
+      {/* Desktop Navigation (the home page uses the "Vad vi gör" links instead) */}
+      <div
+        className={`absolute top-0 left-0 right-0 z-30 hidden ${isHomePage ? "" : "md:block"}`}
+      >
         <div className="bg-white/80 backdrop-blur-sm border-b border-gray-200">
           <div className="container mx-auto px-4">
             <div className="flex justify-center space-x-8 py-4">
@@ -165,7 +171,7 @@ const Hero = () => {
 
       {isContactPage ? (
         <section className="grid grid-cols-1 md:min-h-[max(26rem,50vh)] md:grid-cols-2">
-          <div className="flex flex-col justify-center px-8 pb-10 pt-28 sm:px-12 md:px-14 md:pb-12 md:pt-28 lg:px-20">
+          <div className="relative z-20 flex flex-col justify-center px-8 pb-40 pt-28 sm:px-12 md:px-14 md:pb-44 md:pt-28 lg:px-20">
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-stone-600">
               Vi hjälper dig gärna
             </p>
@@ -199,7 +205,7 @@ const Hero = () => {
             />
           </figure>
         </section>
-      ) : (
+      ) : isHomePage ? null : (
         <>
           <div
             className="absolute inset-0 overflow-hidden"
@@ -227,13 +233,23 @@ const Hero = () => {
                 transform: isHomePage
                   ? `scale(${Math.max(
                       0.5,
-                      1 - (scrollPosition / maxScroll) * 0.5
+                      1 - (scrollPosition / maxScroll) * 0.5,
                     )})`
                   : "scale(0.5)",
               }}
             />
           </div>
         </>
+      )}
+      {isContactPage && (
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-20 w-full md:h-32"
+          preserveAspectRatio="none"
+          viewBox="0 0 100 100"
+        >
+          <path d="M0 0 50 100 100 0v100H0z" className="fill-brand-cream" />
+        </svg>
       )}
     </div>
   );
