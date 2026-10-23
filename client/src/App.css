@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+
+  /* Brand colours: change them here to update the whole site */
+  --color-brand-sand: #f3e6d3; /* hero backgrounds */
+  --color-brand-cream: #fffcf5; /* page background */
+  --color-brand-brown: #6b4a2f; /* hamburger menu and accents */
+}
+
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -8,6 +17,92 @@
   to {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes wordIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes whisk {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(0.12);
+  }
+}
+
+@keyframes whiskOrbit {
+  from {
+    transform: translateX(-14px);
+  }
+  to {
+    transform: translateX(14px);
+  }
+}
+
+@keyframes batter {
+  0%,
+  100% {
+    transform: scaleX(1) translateY(0);
+  }
+  50% {
+    transform: scaleX(0.85) translateY(-2px);
+  }
+}
+
+@keyframes mixerHead {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(1.5px);
+  }
+}
+
+.word-in {
+  animation: wordIn 0.5s ease-out;
+}
+
+.whisk-wire,
+.batter {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.whisk-wire {
+  animation: whisk 0.8s ease-in-out infinite;
+}
+
+.whisk-orbit {
+  animation: whiskOrbit 0.8s ease-in-out infinite alternate;
+}
+
+.batter {
+  animation: batter 0.8s ease-in-out infinite;
+}
+
+.mixer-head {
+  animation: mixerHead 0.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word-in,
+  .whisk-wire,
+  .whisk-orbit,
+  .batter,
+  .mixer-head {
+    animation: none;
   }
 }
 
