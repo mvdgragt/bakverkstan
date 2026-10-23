@@ -3,9 +3,9 @@ import { menuItems } from "../../config/navigation";
 import RotatingWord from "./RotatingWord";
 import logo from "../../assets/BakverstandLogoBlack.png";
 import InstagramSlideshow from "./InstagramSlideshow";
-import bakverkImage from "../../assets/kardemummabullar.png";
-import workshopImage from "../../assets/workshop.png";
-import kontaktImage from "../../assets/SeniorOnPhone.png";
+import bakverkImage from "../../assets/kardemummabullar.webp";
+import workshopImage from "../../assets/workshopCard.webp";
+import kontaktImage from "../../assets/SeniorOnPhone.webp";
 
 const descriptions: Record<string, string> = {
   "/bakverk": "Tårtor, kakor och bröd",

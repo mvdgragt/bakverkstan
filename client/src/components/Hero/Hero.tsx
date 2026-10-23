@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../assets/logoBakverkstanWhite.png";
-import backgroundImage from "../../assets/kardemummabullar.png";
+import backgroundImage from "../../assets/kardemummabullar.webp";
 import bakverkImage from "../../assets/cake.webp";
 import easterBackground from "../../assets/EasterBackground1.webp";
 import presentBackground from "../../assets/cakeFruit.webp";
 import workshopImage from "../../assets/workshop.webp";
-import bakerImage from "../../assets/bagare.png";
+import bakerImage from "../../assets/bagare.webp";
 import { INSTAGRAM_URL } from "../../config/environment";
 import { menuItems } from "../../config/navigation";
 import { useUiStore } from "../../stores/uiStore";
