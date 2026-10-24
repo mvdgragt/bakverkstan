@@ -5,10 +5,10 @@ import logo from "../../assets/BakverstandLogoBlack.png";
 import InstagramSlideshow from "./InstagramSlideshow";
 import bakverkImage from "../../assets/kardemummabullar.webp";
 import workshopImage from "../../assets/workshopCard.webp";
-import kontaktImage from "../../assets/SeniorOnPhone.webp";
+import kontaktImage from "../../assets/bagare.webp";
 
 const descriptions: Record<string, string> = {
-  "/bakverk": "Tårtor, kakor och bröd",
+  "/bakverk": "Tårtor, kakor och bullar",
   "/workshops": "Baka tillsammans med oss",
   "/kontakt": "Hör av dig",
 };
