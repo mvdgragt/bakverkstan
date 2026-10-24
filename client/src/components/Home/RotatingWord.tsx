@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 const WORDS = [
   "kakor",
-  "prinsesstårtor",
+  "smörgåstårtor",
   "bullar",
-  "bröd",
+  "bakelser",
   "småkakor",
   "tårtor",
 ];
