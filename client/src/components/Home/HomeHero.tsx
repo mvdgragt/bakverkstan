@@ -38,15 +38,15 @@ const HomeHero = () => (
               <RotatingWord />
             </span>
             <span aria-hidden="true" className="block">
-              med hjärtat
+              med kärlek
             </span>
           </h1>
 
           <h2 className="mt-8 max-w-full font-outfit text-xl  leading-tight sm:text-2xl md:text-xl lg:text-xl xl:text-2xl text-stone-600">
             <span aria-hidden="true" className="block">
-              Bakverkstan är specialiserad i konditori och catering. Vi utgår
-              från Helsingborg och vår bageri. Vi skapar allt från grunden med
-              mycket passion och kunskap.
+              Bakverkstan är ett bageri från Helsingborg. Vi specialiserar oss i
+              konditori och catering. Vi skapar allt från grunden med glädje och
+              kärlek.
             </span>
           </h2>
         </div>
