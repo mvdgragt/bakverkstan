@@ -8,6 +8,7 @@ const navigationItemSchema = z.object({
 export const menuItems = z.array(navigationItemSchema).parse([
   { name: "Hem", href: "/" },
   { name: "Bakverk", href: "/bakverk" },
+  { name: "Sortiment", href: "/sortiment" },
   // { name: "Påsk", href: "/pask" },
   // { name: "Presenter", href: "/presenter" },
   { name: "Workshops", href: "/workshops" },

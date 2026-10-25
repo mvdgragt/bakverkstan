@@ -4,17 +4,20 @@ import RotatingWord from "./RotatingWord";
 import logo from "../../assets/BakverstandLogoBlack.png";
 import InstagramSlideshow from "./InstagramSlideshow";
 import bakverkImage from "../../assets/kardemummabullar.webp";
+import sortimentImage from "../../assets/cakeFruit.webp";
 import workshopImage from "../../assets/workshopCard.webp";
 import kontaktImage from "../../assets/bagare.webp";
 
 const descriptions: Record<string, string> = {
   "/bakverk": "Tårtor, kakor och bullar",
+  "/sortiment": "Beställ för upphämtning",
   "/workshops": "Baka tillsammans med oss",
   "/kontakt": "Hör av dig",
 };
 
 const images: Record<string, string> = {
   "/bakverk": bakverkImage,
+  "/sortiment": sortimentImage,
   "/workshops": workshopImage,
   "/kontakt": kontaktImage,
 };
@@ -106,7 +109,7 @@ const HomeHero = () => (
       <h2 className="text-3xl font-bold text-stone-900 md:text-4xl">
         Vad vi gör
       </h2>
-      <ul className="mx-auto mt-10 grid max-w-6xl grid-cols-3 gap-3 sm:gap-6">
+      <ul className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
         {links.map((item) => (
           <li key={item.href}>
             <Link
