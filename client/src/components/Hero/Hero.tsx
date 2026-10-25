@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import logoImage from "../../assets/logoBakverkstanWhite.png";
 import backgroundImage from "../../assets/kardemummabullar.webp";
 import bakverkImage from "../../assets/cake.webp";
+import sortimentImage from "../../assets/bakverk.webp";
 import easterBackground from "../../assets/EasterBackground1.webp";
 import presentBackground from "../../assets/cakeFruit.webp";
 import workshopImage from "../../assets/workshop.webp";
@@ -34,13 +35,16 @@ const Hero = () => {
   const heroImages = {
     "/": backgroundImage,
     "/bakverk": bakverkImage,
+    "/sortiment": sortimentImage,
     "/pask": easterBackground,
     "/presenter": presentBackground,
     "/workshops": workshopImage,
   } as const;
 
+  // Match on the first path segment so sub-pages like /sortiment/tartor share their section's image.
+  const section = `/${location.pathname.split("/")[1]}`;
   const currentHeroImage =
-    heroImages[location.pathname as keyof typeof heroImages] || heroImages["/"];
+    heroImages[section as keyof typeof heroImages] || heroImages["/"];
 
   const maxScroll = window.innerHeight / 2;
   const heightPercentage = isHomePage

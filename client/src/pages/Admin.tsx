@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import AdminLogin from "../components/admin/AdminLogin";
+import AdminTabs from "../components/admin/AdminTabs";
 import {
   AUDIENCES,
   AUDIENCE_KEYS,
   deleteBooking,
   fetchAdminData,
   formatDate,
-  login,
   logout,
   saveAdminData,
   uploadImage,
@@ -43,7 +44,6 @@ const Field = ({ label, children }: { label: string; children: React.ReactNode }
 
 const Admin = () => {
   const [auth, setAuth] = useState<"checking" | "out" | "in">("checking");
-  const [password, setPassword] = useState("");
   const [workshops, setWorkshops] = useState<Workshop[]>([]);
   const [data, setData] = useState<AdminData | null>(null);
   const [pageLive, setPageLive] = useState(false);
@@ -88,18 +88,6 @@ const Admin = () => {
 
   const num = (value: string) => (value === "" ? 0 : Number(value));
 
-  const handleLogin = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setMessage(null);
-    try {
-      await login(password);
-      setPassword("");
-      await load();
-    } catch (error) {
-      setMessage({ type: "error", text: (error as Error).message });
-    }
-  };
-
   const handleSave = async () => {
     setSaving(true);
     try {
@@ -141,20 +129,7 @@ const Admin = () => {
 
   if (auth === "checking") return <p className="p-12 text-center text-gray-600">Laddar …</p>;
 
-  if (auth === "out") {
-    return (
-      <main className="mx-auto max-w-sm px-6 py-16">
-        <h1 className="mb-6 text-2xl font-bold text-gray-800">Admin</h1>
-        <form onSubmit={handleLogin} className="space-y-4">
-          <Field label="Lösenord">
-            <input type="password" autoComplete="current-password" className={input} value={password} onChange={(e) => setPassword(e.target.value)} required />
-          </Field>
-          {message && <p className="text-red-700" role="alert">{message.text}</p>}
-          <button className="w-full rounded bg-stone-700 px-5 py-2 text-white hover:bg-stone-800">Logga in</button>
-        </form>
-      </main>
-    );
-  }
+  if (auth === "out") return <AdminLogin onLoggedIn={load} />;
 
   const sorted = [...workshops].sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
   const bookings = [...(data?.bookings ?? [])].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
@@ -162,6 +137,7 @@ const Admin = () => {
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-10">
+      <AdminTabs />
       <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl font-bold text-gray-800">Hantera workshops</h1>
         <div className="flex gap-3">

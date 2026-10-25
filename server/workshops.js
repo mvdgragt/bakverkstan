@@ -6,7 +6,7 @@ import { z } from "zod";
 
 export const audiences = ["barnkalas", "seniorer", "mohippa", "svenskt"];
 
-const imageName = z.string().regex(/^[a-f0-9-]{36}\.(jpg|png|webp)$/);
+export const imageName = z.string().regex(/^[a-f0-9-]{36}\.(jpg|png|webp)$/);
 
 // What the admin edits. Available places are never stored: they are derived
 // from `spots`, `reserved` and the bookings, so edits can't clash with bookings.
@@ -142,7 +142,8 @@ const detectImage = (buffer) => {
   return null;
 };
 
-export function createWorkshops({ dataDir, adminPassword, sessionSecret, secureCookie }) {
+// `otherImages` returns uploads used outside workshops (e.g. the sortiment) so cleanup keeps them.
+export function createWorkshops({ dataDir, adminPassword, sessionSecret, secureCookie, otherImages = async () => [] }) {
   const router = express.Router();
   const files = {
     workshops: path.join(dataDir, "workshops.json"),
@@ -411,10 +412,10 @@ export function createWorkshops({ dataDir, adminPassword, sessionSecret, secureC
     }
   );
 
-  // Uploads that no saved workshop references any more are deleted after saving.
+  // Uploads that nothing saved references any more are deleted after saving.
   router.post("/admin/cleanup-images", requireAdmin, async (_request, response, next) => {
     try {
-      const used = new Set((await loadWorkshops()).map((w) => w.image));
+      const used = new Set([...(await loadWorkshops()).map((w) => w.image), ...(await otherImages())]);
       for (const name of await readdir(uploadDir).catch(() => [])) {
         if (!imageName.safeParse(name).success || used.has(name)) continue;
         const file = path.join(uploadDir, name);
@@ -426,5 +427,5 @@ export function createWorkshops({ dataDir, adminPassword, sessionSecret, secureC
     }
   });
 
-  return { router, uploadDir };
+  return { router, uploadDir, isAdmin, requireAdmin };
 }

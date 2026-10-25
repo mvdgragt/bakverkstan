@@ -6,6 +6,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { createInstagram } from "./instagram.js";
+import { createSortiment } from "./sortiment.js";
 import { createWorkshops } from "./workshops.js";
 
 const optionalTokenSchema = z.preprocess(
@@ -42,8 +43,15 @@ const workshops = createWorkshops({
   adminPassword: environment.ADMIN_PASSWORD,
   sessionSecret: environment.SESSION_SECRET ?? randomBytes(32).toString("hex"),
   secureCookie: process.env.NODE_ENV === "production",
+  otherImages: () => sortiment.usedImages(),
+});
+const sortiment = createSortiment({
+  dataDir: path.join(directory, "data"),
+  isAdmin: workshops.isAdmin,
+  requireAdmin: workshops.requireAdmin,
 });
 app.use("/api", workshops.router);
+app.use("/api", sortiment.router);
 app.use(
   "/uploads",
   express.static(workshops.uploadDir, { maxAge: "7d", immutable: true, index: false, fallthrough: false })
